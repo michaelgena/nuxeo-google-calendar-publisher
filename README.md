@@ -10,15 +10,15 @@ mvn install
 
 ## Deploy
 
-Upload the zip file generated (nuxeo-google-calendar-publisher-mp/target/nuxeo-google-calendar-publisher-mp-xxx.zip)
-into your local packages and install it.
+Upload the package marketplace generated under the folder nuxeo-google-calendar-publisher-mp/target/ into your local packages of the nuxeo platform and install it.
 
 ## Nuxeo Studio
 
-Import the automation operation "Publisher" in your project registry
-You will find a new entry under the automation tools:
-Notification>Publish on Google Calendar
-The operation expects multiple parameters:
+Import the automation operation "Publisher" in your project registry. You will find a new entry under the automation tools:
+
+**Notification>Publish on Google Calendar**
+
+This operation expects multiple parameters:
 - userEmailAddress: the user e-mail to whom an event will be created
 - summary: the title of the event
 - location: the location of the event
@@ -29,9 +29,7 @@ The operation expects multiple parameters:
 
 ## Configuration in the Nuxeo platform
 
-We use the OAuth2 authentification mechanism in order to do the publication on the user's calendar.
-First you need to have a google calendar api account with a client ID and Client Secret token. 
-If you don't have one you have to create it here: https://console.developers.google.com/
+We use the OAuth2 authentification mechanism in order to do the publication on behalf of a user. In order to do that you need to have a google calendar api account with a client ID and Client Secret token. If you don't have one you have to create it here: https://console.developers.google.com/
 
 Then you need to add some modification under Administrator>Cloud Services>Service Providers>googledrive
 - Edit the Client ID and the Client Secret. Note that this is actually a workaround, the ideal solution would be to have a dedicated service provider named googlecalendar.
