@@ -25,7 +25,7 @@ This operation expects multiple parameters:
 - description: the description of the event
 - startDate: the start date of the event (currently only full days events are handled)
 - endDate: the end date of the event
-- attendeeEmailAddress: e-mail adress of the attendee (currently only one attendee is handled)
+- attendeeEmailAddress: e-mail address of the attendee (currently only one attendee is handled)
 
 ## Configuration in the Nuxeo platform
 
