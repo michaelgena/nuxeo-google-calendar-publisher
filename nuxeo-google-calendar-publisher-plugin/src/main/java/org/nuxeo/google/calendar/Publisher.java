@@ -75,7 +75,15 @@ public class Publisher {
 		try {
 			httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 
-			Credential credential = new GoogleCredential().setAccessToken(getAccessToken(userEmailAddress));
+			//Credential credential = new GoogleCredential().setAccessToken(getAccessToken(userEmailAddress));
+			
+			OAuth2ServiceProvider serviceProvider = Framework.getLocalService(OAuth2ServiceProviderRegistry.class).getProvider("googledrive");
+	        Credential storedCredential = serviceProvider.loadCredential(userEmailAddress);
+			
+			Credential credential = new GoogleCredential.Builder()
+				    .setClientSecrets(serviceProvider.getClientId(), serviceProvider.getClientSecret())
+				    .setJsonFactory(JSON_FACTORY).setTransport(httpTransport).build()
+				    .setRefreshToken(storedCredential.getRefreshToken()).setAccessToken(storedCredential.getAccessToken());
 
 	    	// Initialize Calendar service with valid OAuth credentials	    	
 			Calendar service = new Calendar.Builder(httpTransport, JSON_FACTORY, credential).build();
@@ -121,4 +129,5 @@ public class Publisher {
         }
         return null;
     }
+ 
 }
