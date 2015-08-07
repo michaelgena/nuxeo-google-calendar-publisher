@@ -19,27 +19,29 @@ Import the automation operation "Publisher" in your project registry
 You will find a new entry under the automation tools:
 Notification>Publish on Google Calendar
 The operation expects multiple parameters:
--userEmailAddress: the user e-mail to whom an event will be created
--summary: the title of the event
--location: the location of the event
--description: the description of the event
--startDate: the start date of the event (currently only full days events are handled)
--endDate: the end date of the event
--attendeeEmailAddress: e-mail adress of the attendee (currently only one attendee is handled)
+- userEmailAddress: the user e-mail to whom an event will be created
+- summary: the title of the event
+- location: the location of the event
+- description: the description of the event
+- startDate: the start date of the event (currently only full days events are handled)
+- endDate: the end date of the event
+- attendeeEmailAddress: e-mail adress of the attendee (currently only one attendee is handled)
 
 ## Configuration in the Nuxeo platform
 
-We currently use the OAuth2 authentification mechanism in order to do the publication.
-First you need to have a google api access for google calendar with a client ID and Client Secret token. 
+We use the OAuth2 authentification mechanism in order to do the publication on the user's calendar.
+First you need to have a google calendar api account with a client ID and Client Secret token. 
 If you don't have one you have to create it here: https://console.developers.google.com/
 
 Then you need to add some modification under Administrator>Cloud Services>Service Providers>googledrive
-Add/Edit the Client ID and the Client Secret
+- Edit the Client ID and the Client Secret. Note that this is actually a workaround, the ideal solution would be to have a dedicated service provider named googlecalendar.
 
--d’étendre le périmètre de l'application existante pour google drive (déjà défini dans nuxeo) en lui donnant la possibilité de publier sur Google Calendar (https://console.developers.google.com/project)
--d’étendre également le scope de cette appli en rajoutant https://www.google.com/calendar/feeds/ , dans admin>Cloud Services> Oauth2 Service Providers> googledrive
+- Edit the scope part by adding "email,https://www.google.com/calendar/feeds/" in order that the user authorizes the offline access to his calendar.
+ 
+## Usage
 
-If you don't have a key or a google account , you can create one at https://console.developers.google.com/
+Before launching the operation of publication, make sure that you go through the offline access authorization process, in order to have a valid token for the api. To do so, you need to go to Home>Cloud Services and Connect to Google Drive then accept the offline access to the user's calendar.
+That's it! Now you can run your publication operation, and you should be able to see that an event has been published on the calendar of the user.
 
 ## Important Note
 
